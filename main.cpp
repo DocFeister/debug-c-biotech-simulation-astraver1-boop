@@ -11,18 +11,19 @@ This example was created with A.I. (with extra mistakes added by hand) by Dr. Sc
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cassert>
 
 int main()
 {
-    srand(time(0)); // Seed the random number generator
+    srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
 
-    int initialBacteria; // Starting population of bacteria (should be initialized to 1000)
-    int reproductionRate = 3; // Each bacterium reproduces three times per cycle
-    int deathRate = 400; // Bacteria that die per cycle
-    int mutationChance = 10; // Chance (in percentage) of mutation occurring
-    int mutationEffect = 100; // Additional bacteria produced due to beneficial mutation
+    int initialBacteria = 1000; // Starting population of bacteria
+    int reproductionRate = 3;   // Each bacterium reproduces three times per cycle
+    int deathRate = 400;        // Bacteria that die per cycle
+    int mutationChance = 10;    // Chance (in percentage) of mutation occurring
+    int mutationEffect = 100;   // Additional bacteria produced due to beneficial mutation
     int harmfulMutationEffect = 200; // Bacteria killed due to harmful mutation
-    int cycles = 15; // Number of cycles to simulate
+    int cycles = 15;            // Number of cycles to simulate
 
     for (int i = 0; i < cycles; i++)
     {
@@ -41,12 +42,14 @@ int main()
             if (mutationType == 0)
             {
                 initialBacteria += mutationEffect;
-                std::cout << "Beneficial mutation occurred! Additional " << mutationEffect << " bacteria added." << std::endl;
+                std::cout << "Beneficial mutation occurred! Additional "
+                          << mutationEffect << " bacteria added." << std::endl;
             }
             else
             {
                 initialBacteria -= harmfulMutationEffect;
-                std::cout << "Harmful mutation occurred! " << harmfulMutationEffect << " bacteria killed." << std::endl;
+                std::cout << "Harmful mutation occurred! "
+                          << harmfulMutationEffect << " bacteria killed." << std::endl;
             }
         }
 
@@ -56,18 +59,25 @@ int main()
             initialBacteria = 0;
         }
 
+        // Debugging tactic: verify assumption
+        assert(initialBacteria >= 0);
+
         // Print the population after each cycle
-        std::cout << "Cycle " << i + 1 << ": " << initialBacteria << " bacteria" << std::endl;
+        std::cout << "Cycle " << i + 1 << ": "
+                  << initialBacteria << " bacteria" << std::endl;
     }
 
     // Check if the population has been wiped out
     if (initialBacteria <= 0)
     {
-        std::cout << "All bacteria have been wiped out after " << cycles << " cycles." << std::endl;
+        std::cout << "All bacteria have been wiped out after "
+                  << cycles << " cycles." << std::endl;
     }
     else
     {
-        std::cout << "After " << cycles << " cycles, " << initialBacteria > " bacteria remain." << std::endl; // Intentional operator error
+        std::cout << "After " << cycles << " cycles, "
+                  << initialBacteria << " bacteria remain." << std::endl;
     }
 
     return 0;
+}
