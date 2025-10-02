@@ -46,18 +46,18 @@ int main()
             else
             {
                 initialBacteria -= harmfulMutationEffect;
-                std::cout << "Harmful mutation occurred! " << harmfulMutationEffect << " bacteria killed." << std::end1;
+                std::cout << "Harmful mutation occurred! " << harmfulMutationEffect << " bacteria killed." << std::endl;
             }
         }
 
         // Ensure population doesn't drop below zero
-        if (initialBacteria < 0
+        if (initialBacteria < 0)
         {
             initialBacteria = 0;
         }
 
         // Print the population after each cycle
-        std::cout << "Cycle " << i + 1 << ": " << initialBacteria << " bacteria" << std:endl;
+        std::cout << "Cycle " << i + 1 << ": " << initialBacteria << " bacteria" << std::endl;
     }
 
     // Check if the population has been wiped out
